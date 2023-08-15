@@ -1,0 +1,6 @@
+---
+#- import_playbook: AgentPlaybooks/playbook_docker.yml
+#- import_playbook: AgentPlaybooks/playbook_jdk.yml
+#- import_playbook: AgentPlaybooks/playbook_chrome.yml
+#- import_playbook: AgentPlaybooks/utils.yml
+#- import_playbook: AgentPlaybooks/playbook_devops.yml

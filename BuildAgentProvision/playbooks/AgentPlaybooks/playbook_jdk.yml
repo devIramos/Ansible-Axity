@@ -1,0 +1,14 @@
+---
+- name: Instalacion de Java
+  hosts: virtualmachine
+  gather_facts: true
+  become: yes
+  tasks:
+    - name: Actualizar la lista de paquetes
+      apt:
+        update_cache: yes
+
+    - name: Instalar openjdk-11-jdk
+      apt:
+        name: openjdk-11-jdk
+        state: present

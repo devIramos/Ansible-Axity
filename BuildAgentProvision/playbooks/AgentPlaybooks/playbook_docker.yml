@@ -1,0 +1,23 @@
+---
+- name: Install Docker on Ubuntu
+  hosts: all
+  become: yes
+  tasks:
+    - name: Download Docker install script
+      get_url:
+        url: https://get.docker.com
+        dest: /tmp/get-docker.sh
+
+    - name: Show Docker install steps
+      command: sh /tmp/get-docker.sh
+      args:
+        creates: /usr/bin/docker
+
+    - name: Install Docker
+      shell: sh /tmp/get-docker.sh
+
+    - name: Install uidmap
+      shell: sudo apt-get install -y uidmap
+
+    - name: Set permissions for /var/run/docker.sock
+      shell: sudo chmod o+rw /var/run/docker.sock

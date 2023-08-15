@@ -1,0 +1,42 @@
+---
+- name: Playbook de ejemplo
+  hosts: webservers
+
+  vars:
+    http_port: 80
+    max_clients: 200
+
+  pre_tasks:
+  - name: Run this before the main tasks
+    command: echo "pre-task here"
+
+  tasks:
+  - name: Ensure Apache is installed
+    apt:
+      name: apache2
+      state: present
+    notify: Restart Apache
+
+  - name: Copy Apache configuration file
+    copy:
+      src: /path/to/local/file.conf
+      dest: /path/on/remote/server.conf
+    notify: Restart Apache
+
+  handlers:
+  - name: Restart Apache
+    service:
+      name: apache2
+      state: restarted
+
+  post_tasks:
+  - name: Run this after the main tasks
+    command: echo "post-task here"
+
+  become: yes
+
+  environment:
+    http_proxy: http://proxy.example.com:8080
+
+  roles:
+  - role: example_role
